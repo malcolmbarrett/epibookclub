@@ -1,13 +1,15 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# SER 2018 tweets
+# Epi Book Club tweets
 
-This repository contains R code and data for analyzing tweets about SER
-2018. The analysis is based around the `rtweet` package, and the code is
-largely based on work `rtweets` author [Mike
-Kearney](https://github.com/mkearney) did for other conferences. My
-thanks to him for letting me use it.
+This repository contains R code and data for analyzing tweets about the
+Epi Book Club’s discussion of The Book of Why. The analysis is based
+around the `rtweet` package, and the code is largely based on work
+`rtweets` author [Mike Kearney](https://github.com/mkearney) did for
+conferences, which I adapted for
+[SER 2018](https://github.com/malcolmbarrett/ser_tweets). My thanks to
+him for letting me use it.
 
 Please feel free to submit PRs.
 
@@ -17,8 +19,7 @@ Load the data using Twitter’s search API:
 library(rtweet)
 
 ## search terms
-ser <- c("ser51", "ser2018",
-  "ser18", "societyforepi")
+ebc <- c("epibookclub", "bookofwhy", "thebookofwhy")
 
 ## use since_id from previous search (if exists)
 if (file.exists(file.path("data", "search.rds"))) {
@@ -28,9 +29,9 @@ if (file.exists(file.path("data", "search.rds"))) {
   since_id <- NULL
 }
 
-## search for up to 100,000 tweets mentioning SER 2018
+## search for up to 100,000 tweets mentioning the book club or Book of Why
 rt <- search_tweets(
-  paste(ser, collapse = " OR "),
+  paste(ebc, collapse = " OR "),
   n = 1e5, verbose = FALSE,
   since_id = since_id,
   retryonratelimit = TRUE
@@ -64,7 +65,8 @@ saveRDS(rt, file.path("data", "search.rds"))
 saveRDS(rt[, "status_id"], file.path("data", "search-ids.rds"))
 ```
 
-From there, it’s easy to plot the number of tweets about SER over time.
+From there, it’s easy to plot the number of tweets about the Epi book
+club over time.
 
 ``` r
 library(tidyverse)
@@ -72,7 +74,7 @@ library(tidyverse)
 rt %>%
   filter(created_at > "2018-06-10") %>%
   ts_plot("2 hours", color = "transparent") +
-  geom_smooth(method = "loess", se = FALSE, span = .5,
+  geom_smooth(method = "loess", se = FALSE, span = .4,
   size = 1.5, colour = colorblindr::palette_OkabeIto[2]) +
   geom_point(size = 3.5,
     shape = 21, col = "#E69F00", fill = "#E69F0090") +
@@ -81,7 +83,7 @@ rt %>%
     plot.title = element_text(size = rel(1.5), face = "bold"),
     plot.subtitle = element_text(size = rel(1.2)),
     plot.caption = element_text(colour = "#444444")) +
-  labs(title = "Frequency of tweets about SER 2018 over time",
+  labs(title = "Frequency of tweets about Epi Book Club over time",
     subtitle = "Twitter status counts aggregated using two-hour intervals",
     caption = "\n\nSource: Data gathered via Twitter's standard `search/tweets` API using rtweet\n Code provided by Mike Kearney (@kearneymw)",
     x = NULL, y = NULL)
@@ -133,7 +135,7 @@ rt %>%
     scale_color_manual(values = c(Positive = "#0072B2", Negative = "#D55E00")) +
     scale_fill_manual(values = c(Positive = "#0072B2BB", Negative = "#D55E00BB")) +
     labs(x = NULL, y = NULL,
-    title = "Sentiment (valence) of SER 2018 tweets over time",
+    title = "Sentiment (valence) of Epi Book Club tweets over time",
     subtitle = "Mean sentiment of tweets aggregated in one-hour intervals",
     caption = "\nSource: Data gathered using rtweet. Sentiment analysis done using syuzhet\n Code provided by Mike Kearney (@kearneymw)")
 ```
@@ -146,7 +148,8 @@ ggsave("sentiment.png", dpi = 320, width = 7.5)
 #> Saving 7.5 x 5 in image
 ```
 
-Finally, we can plot the network of Twitter users talking about SER.
+Finally, we can plot the network of Twitter users talking about the Epi
+Book Club
 
 ``` r
 library(tidygraph)
@@ -225,7 +228,7 @@ twitter_graph %>%
   theme(plot.title = element_text(size = rel(1.5), face = "bold", margin = margin(3, 1, 10, 1)),
       plot.subtitle = element_text(size = rel(1.2)),
       plot.caption = element_text(colour = "#444444")) +
-  labs(title = "Connections between Twitter users during SER 2018",
+  labs(title = "Connections between Twitter users in the Epi Book Club",
     caption = "\n\nSource: Data gathered via Twitter's standard `search/tweets` API using rtweet\n Code provided by Mike Kearney (@kearneymw)",
     x = NULL, y = NULL)
 ```
@@ -256,7 +259,7 @@ twitter_graph %>%
   theme(plot.title = element_text(size = rel(1.5), face = "bold", margin = margin(3, 1, 10, 1)),
       plot.subtitle = element_text(size = rel(1.2)),
       plot.caption = element_text(colour = "#444444")) +
-  labs(title = "Connections between Twitter users during SER 2018",
+  labs(title = "Connections between Twitter users in the Epi Book Club",
     caption = "\n\nSource: Data gathered via Twitter's standard `search/tweets` API using rtweet\n Code provided by Mike Kearney (@kearneymw)",
     x = NULL, y = NULL)
 ```
