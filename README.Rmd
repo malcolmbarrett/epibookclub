@@ -136,7 +136,7 @@ rt %>%
     scale_color_manual(values = c(Positive = "#0072B2", Negative = "#D55E00")) +
     scale_fill_manual(values = c(Positive = "#0072B2BB", Negative = "#D55E00BB")) +
     labs(x = NULL, y = NULL,
-    title = "Sentiment (valence) of Epi Book Club tweets over time",
+    title = "Sentiment (valence) of Epi Book Club tweets over\ntime",
     subtitle = "Mean sentiment of tweets aggregated in one-hour intervals",
     caption = "\nSource: Data gathered using rtweet. Sentiment analysis done using syuzhet\n Code provided by Mike Kearney (@kearneymw)")
 
@@ -217,7 +217,7 @@ twitter_graph %>%
   theme(plot.title = element_text(size = rel(1.5), face = "bold", margin = margin(3, 1, 10, 1)),
       plot.subtitle = element_text(size = rel(1.2)),
       plot.caption = element_text(colour = "#444444")) +
-  labs(title = "Connections between Twitter users in the Epi Book Club",
+  labs(title = "Connections between Twitter users in the Epi Book\nClub",
     caption = "\n\nSource: Data gathered via Twitter's standard `search/tweets` API using rtweet\n Code provided by Mike Kearney (@kearneymw)",
     x = NULL, y = NULL)
 
@@ -243,7 +243,7 @@ twitter_graph %>%
   theme(plot.title = element_text(size = rel(1.5), face = "bold", margin = margin(3, 1, 10, 1)),
       plot.subtitle = element_text(size = rel(1.2)),
       plot.caption = element_text(colour = "#444444")) +
-  labs(title = "Connections between Twitter users in the Epi Book Club",
+  labs(title = "Connections between Twitter users in the Epi Book\nClub",
     caption = "\n\nSource: Data gathered via Twitter's standard `search/tweets` API using rtweet\n Code provided by Mike Kearney (@kearneymw)",
     x = NULL, y = NULL)
 
