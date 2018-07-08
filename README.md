@@ -16,7 +16,7 @@ Please feel free to submit PRs.
 Load the data using Twitter’s search API:
 
 ``` r
-library(rtweet)
+library(rtweet) 
 
 ## search terms
 ebc <- c("epibookclub", "bookofwhy", "thebookofwhy")
